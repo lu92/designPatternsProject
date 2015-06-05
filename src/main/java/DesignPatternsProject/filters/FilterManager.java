@@ -8,7 +8,7 @@ import java.util.Set;
  * Created by lucjan on 04.06.15.
  */
 public class FilterManager {
-    private ObjectCriteria begin;
+    private PersonCriteria begin;
     private Set<Person> allPersons;
 
     public FilterManager() {
@@ -19,14 +19,14 @@ public class FilterManager {
     }
 
     public Set<Person> doFilter() {
-        return begin.performFilter(allPersons);
+        return begin.doCriteriaFilter(allPersons);
     }
 
-    public ObjectCriteria getBegin() {
+    public PersonCriteria getBegin() {
         return begin;
     }
 
-    public void setBegin(ObjectCriteria begin) {
+    public void setBegin(PersonCriteria begin) {
         this.begin = begin;
     }
 

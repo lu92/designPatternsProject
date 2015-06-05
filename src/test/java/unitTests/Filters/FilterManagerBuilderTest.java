@@ -1,17 +1,10 @@
 package unitTests.Filters;
 
-import DesignPatternsProject.entities.actors.Person;
 import DesignPatternsProject.filters.FilterManagerBuilder;
-import DesignPatternsProject.filters.personFilters.AddressCriteria;
-import DesignPatternsProject.filters.personFilters.NameAndLastNameCriteria;
-import DesignPatternsProject.filters.personFilters.RoleCriteria;
-import DesignPatternsProject.filters.personFilters.SalaryBruttoGreaterThanCriteria;
+import DesignPatternsProject.filters.personFilters.*;
 import DesignPatternsProject.resources.PersonResource;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by lucjan on 04.06.15.
@@ -22,7 +15,7 @@ public class FilterManagerBuilderTest {
 
     @Test
     public void insertAndDeleteTest() {
-        FilterManagerBuilder filterManagerBuilder = new FilterManagerBuilder(getPersonFromResources());
+        FilterManagerBuilder filterManagerBuilder = new FilterManagerBuilder(PersonResource.getAllPersonsFromResources());
         Assert.assertNotNull(filterManagerBuilder);
 
         Assert.assertEquals(0, filterManagerBuilder.getCriterias().size());
@@ -36,47 +29,43 @@ public class FilterManagerBuilderTest {
 
         filterManagerBuilder.addCriteria(roleCriteria);
 
-        Assert.assertEquals(3, filterManagerBuilder.getCriterias().size());
+        Assert.assertEquals(3, filterManagerBuilder.getNumberOfCriterias());
 
         filterManagerBuilder.addCriteria(new SalaryBruttoGreaterThanCriteria(1000));
-        Assert.assertEquals(4, filterManagerBuilder.getCriterias().size());
+        Assert.assertEquals(4, filterManagerBuilder.getNumberOfCriterias());
 
-        filterManagerBuilder.removeCriteria(new RoleCriteria("Java Developer"));
-        Assert.assertEquals(3, filterManagerBuilder.getCriterias().size());
+        filterManagerBuilder.removeCriteria(roleCriteria);
+        Assert.assertEquals(3, filterManagerBuilder.getNumberOfCriterias());
+
+//        for (ObjectCriteria criteria : filterManagerBuilder.getCriterias())
+//            System.out.println(criteria);
 
     }
 
 
     @Test
     public void NameAndLastnameCriteriaTest() {
-        FilterManagerBuilder filterManagerBuilder = new FilterManagerBuilder(getPersonFromResources());
+        FilterManagerBuilder filterManagerBuilder = new FilterManagerBuilder(PersonResource.getAllPersonsFromResources());
         Assert.assertNotNull(filterManagerBuilder);
 
         Assert.assertEquals(0, filterManagerBuilder.getCriterias().size());
 
         filterManagerBuilder.addCriteria(
-                new NameAndLastNameCriteria("Adrian", "Krawiec")
+                new SalaryBruttoGreaterThanCriteria(6000),
+                new SalaryBruttoLessThanCriteria(7100),
+                new NameAndLastNameCriteria("Wojciech", "Seliga"),
+                new RoleCriteria("Java Developer Role"),
+                new RegularEmploymenTypeCriteria()
         );
 
 
-        Assert.assertEquals(1, filterManagerBuilder.getBuiltResult().doFilter().size());
-    }
+        Assert.assertEquals(5, filterManagerBuilder.getNumberOfCriterias());
 
-    private Set<Person> getPersonFromResources() {
-        Set<Person> personSet = new HashSet<>();
-        personSet.add(PersonResource.getDatabaseDeveloperAdrianCiecholewski());
-        personSet.add(PersonResource.getDatabaseDeveloperAdrianKrawiec());
-        personSet.add(PersonResource.getDatabaseDeveloperLukaszDebinski());
-        personSet.add(PersonResource.getJavaDeveloperAdamWojcik());
-        personSet.add(PersonResource.getJavaDeveloperKamilMilosz());
-        personSet.add(PersonResource.getJavaDeveloperPiotrNawalka());
-        personSet.add(PersonResource.getJavaDeveloperWojciechSeliga());
-        personSet.add(PersonResource.getManagerJanKowalski());
-        personSet.add(PersonResource.getUXDesignerMonikaStokrotka());
-        personSet.add(PersonResource.getWebDeveloperDominikNocon());
-        personSet.add(PersonResource.getWebDeveloperMateuszStepala());
-        personSet.add(PersonResource.getWebDeveloperPrzemekRoman());
-        return personSet;
+//        for (Person person : filterManagerBuilder.getBuiltResult().doFilter())
+//            System.out.println(person);
+
+        Assert.assertEquals(1, filterManagerBuilder.getBuiltResult().doFilter().size());
+
     }
 
 }

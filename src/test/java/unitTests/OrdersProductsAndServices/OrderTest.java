@@ -6,6 +6,7 @@ import DesignPatternsProject.entities.personalData.Address;
 import DesignPatternsProject.entities.productsAndServices.Product;
 import DesignPatternsProject.entities.productsAndServices.Service;
 import DesignPatternsProject.strategies.Country;
+import DesignPatternsProject.strategies.Currency;
 import DesignPatternsProject.strategies.PolishTaxation08;
 import DesignPatternsProject.strategies.TaxationStrategy;
 import org.junit.Assert;
@@ -18,7 +19,7 @@ public class OrderTest {
 
     @Test
     public void createSimpleOrderAttempt() {
-        Country Poland = new Country("Poland", "zł", 1, 0);
+        Country Poland = new Country("Poland", Currency.PLN, 1, 0);
         Assert.assertNotNull(Poland);
 
         TaxationStrategy poland08 = new PolishTaxation08(Poland);

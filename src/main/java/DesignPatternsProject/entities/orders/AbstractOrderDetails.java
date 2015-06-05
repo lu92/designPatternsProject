@@ -8,9 +8,7 @@ import DesignPatternsProject.entities.productsAndServices.Product;
 import DesignPatternsProject.entities.productsAndServices.Service;
 import DesignPatternsProject.strategies.TaxationStrategy;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by lucjan on 29.04.15.
@@ -20,7 +18,7 @@ public abstract class AbstractOrderDetails {
     protected Date date;
     protected TaxationStrategy taxation;
     protected Client client;
-    protected List<BaseProduct> order = new ArrayList<>();
+    protected Set<BaseProduct> order = new HashSet<>();
 
     public AbstractOrderDetails() {
     }
@@ -52,13 +50,6 @@ public abstract class AbstractOrderDetails {
         order.remove(product);
     }
 
-    public void removeProduct(String productName) {
-        for (int i=0; i<order.size(); i++)
-            if (order.get(i).getName().equalsIgnoreCase(productName)) {
-                order.remove(i);
-                break;
-            }
-    }
 
     public Long getOrder_id() {
         return order_id;
@@ -77,7 +68,7 @@ public abstract class AbstractOrderDetails {
         return date;
     }
 
-    public List<BaseProduct> getOrder() {
+    public Set<BaseProduct> getOrder() {
         return order;
     }
 
@@ -127,6 +118,9 @@ public abstract class AbstractOrderDetails {
         return null;
     }
 
+    public double getTax() {
+        return taxation.calculateTax();
+    }
 
     public double getPriceBySelectedTaxaction() {
         return 0;

@@ -1,7 +1,7 @@
 package DesignPatternsProject.filters.personFilters;
 
 import DesignPatternsProject.entities.actors.Person;
-import DesignPatternsProject.filters.ObjectCriteria;
+import DesignPatternsProject.filters.PersonCriteria;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,12 +9,12 @@ import java.util.Set;
 /**
  * Created by lucjan on 04.06.15.
  */
-public class NameAndLastNameCriteria extends ObjectCriteria {
+public class NameAndLastNameCriteria extends PersonCriteria {
 
     private String nameCriteria;
     private String lastnameCriteria;
 
-    public NameAndLastNameCriteria(ObjectCriteria next, String nameCriteria, String lastnameCriteria) {
+    public NameAndLastNameCriteria(PersonCriteria next, String nameCriteria, String lastnameCriteria) {
         super(next);
         this.nameCriteria = nameCriteria;
         this.lastnameCriteria = lastnameCriteria;
@@ -34,5 +34,13 @@ public class NameAndLastNameCriteria extends ObjectCriteria {
                 personFindedByNameAndLastname.add(person);
         }
         return personFindedByNameAndLastname;
+    }
+
+    @Override
+    public String toString() {
+        return "NameAndLastNameCriteria{" +
+                "nameCriteria='" + nameCriteria + '\'' +
+                ", lastnameCriteria='" + lastnameCriteria + '\'' +
+                "} " + super.toString();
     }
 }

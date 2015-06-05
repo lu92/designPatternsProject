@@ -60,4 +60,13 @@ public final class RoleResource {
         );
         return role;
     }
+
+    public static Role getClientRole() {
+        Role role = new Role("Client Role");
+        role.addPrivileges(
+                new Privilege("Login to system"),
+                new Privilege("negotiating prices")
+        );
+        return role;
+    }
 }

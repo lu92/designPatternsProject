@@ -90,4 +90,15 @@ public class Salary {
     public void setInsurancePrice(double insurancePrice) {
         this.insurancePrice = insurancePrice;
     }
+
+    @Override
+    public String toString() {
+        return "Salary{" +
+                "id=" + id +
+                ", type=" + type +
+                ", netto=" + netto +
+                ", brutto=" + brutto +
+                ", insurancePrice=" + insurancePrice +
+                '}';
+    }
 }

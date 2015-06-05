@@ -2,7 +2,7 @@ package DesignPatternsProject.filters.personFilters;
 
 import DesignPatternsProject.entities.actors.Person;
 import DesignPatternsProject.entities.personalData.Role;
-import DesignPatternsProject.filters.ObjectCriteria;
+import DesignPatternsProject.filters.PersonCriteria;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,14 +10,14 @@ import java.util.Set;
 /**
  * Created by lucjan on 04.06.15.
  */
-public class RoleCriteria extends ObjectCriteria {
+public class RoleCriteria extends PersonCriteria {
     private String roleCriteria;
 
     public RoleCriteria(String roleCriteria) {
         this.roleCriteria = roleCriteria;
     }
 
-    public RoleCriteria(ObjectCriteria next, String roleCriteria) {
+    public RoleCriteria(PersonCriteria next, String roleCriteria) {
         super(next);
         this.roleCriteria = roleCriteria;
     }
@@ -35,19 +35,9 @@ public class RoleCriteria extends ObjectCriteria {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        RoleCriteria that = (RoleCriteria) o;
-
-        if (!roleCriteria.equals(that.roleCriteria)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return roleCriteria.hashCode();
+    public String toString() {
+        return "RoleCriteria{" +
+                "roleCriteria='" + roleCriteria + '\'' +
+                "} " + super.toString();
     }
 }

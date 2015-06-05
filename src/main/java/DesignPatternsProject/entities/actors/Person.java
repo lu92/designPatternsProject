@@ -165,6 +165,7 @@ public abstract class Person {
                 ", personality=" + personality +
                 ", address=" + address +
                 ", roles=" + roles +
+                ", salary=" + salary +
                 '}';
     }
 }

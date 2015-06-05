@@ -2,7 +2,7 @@ package DesignPatternsProject.filters.personFilters;
 
 import DesignPatternsProject.entities.actors.Person;
 import DesignPatternsProject.entities.personalData.EmploymentContractType;
-import DesignPatternsProject.filters.ObjectCriteria;
+import DesignPatternsProject.filters.PersonCriteria;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,12 +10,12 @@ import java.util.Set;
 /**
  * Created by lucjan on 05.06.15.
  */
-public class RegularEmploymenTypeCriteria extends ObjectCriteria {
+public class RegularEmploymenTypeCriteria extends PersonCriteria {
 
     public RegularEmploymenTypeCriteria() {
     }
 
-    public RegularEmploymenTypeCriteria(ObjectCriteria next) {
+    public RegularEmploymenTypeCriteria(PersonCriteria next) {
         super(next);
     }
 
@@ -26,6 +26,11 @@ public class RegularEmploymenTypeCriteria extends ObjectCriteria {
             if (person.getSalary().getType() == EmploymentContractType.REGULAR_EMPLOYMENT)
                 personsFindedByRegularEmploymentType.add(person);
 
-        return getNext().performFilter(personsFindedByRegularEmploymentType);
+        return personsFindedByRegularEmploymentType;
+    }
+
+    @Override
+    public String toString() {
+        return "RegularEmploymenTypeCriteria{} " + super.toString();
     }
 }

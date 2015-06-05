@@ -8,20 +8,14 @@ import DesignPatternsProject.entities.actors.Worker;
 import DesignPatternsProject.entities.personalData.EmploymentContractType;
 import DesignPatternsProject.entities.personalData.Salary;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by lucjan on 13.05.15.
  */
 public class PersonResource {
 
-    public static Person getManagerJanKowalski() {
-        PersonBuilder personBuilder = new PersonBuilder("Jan_Kowalski", "Jan_Kowalski", "jan.kowalski@gmail.com", Manager.class);
-        personBuilder.setAddress("Poland", "Warsaw", "30-330 Warsaw");
-        personBuilder.setPersonality("Jan", "Kowalski", "20/04/1970", "123456789");
-        personBuilder.addRoles(
-                RoleResource.getManagerRole(),
-                RoleResource.getWorkerRole());
-        return personBuilder.getBuildResult();
-    }
 
     public static Person getJavaDeveloperKamilMilosz() {
         PersonBuilder personBuilder = new PersonBuilder("Kamil_Milosz", "Kamil_Milosz", "kamil_Milosz@gmail.com", Worker.class);
@@ -30,9 +24,20 @@ public class PersonResource {
         personBuilder.addRoles(
                 RoleResource.getJAVADeveloper(),
                 RoleResource.getWorkerRole());
+        personBuilder.setSalary(new Salary(EmploymentContractType.REGULAR_EMPLOYMENT, 7005));
         return personBuilder.getBuildResult();
     }
 
+    public static Person getManagerJanKowalski() {
+        PersonBuilder personBuilder = new PersonBuilder("Jan_Kowalski", "Jan_Kowalski", "jan.kowalski@gmail.com", Manager.class);
+        personBuilder.setAddress("Poland", "Warsaw", "30-330 Warsaw");
+        personBuilder.setPersonality("Jan", "Kowalski", "20/04/1970", "123456789");
+        personBuilder.addRoles(
+                RoleResource.getManagerRole(),
+                RoleResource.getWorkerRole());
+        personBuilder.setSalary(new Salary(EmploymentContractType.REGULAR_EMPLOYMENT, 110000));
+        return personBuilder.getBuildResult();
+    }
     public static Person getJavaDeveloperWojciechSeliga() {
         PersonBuilder personBuilder = new PersonBuilder("Wojciech_Seliga", "Wojciech_Seliga", "wojciech_seliga@gmail.com", Worker.class);
         personBuilder.setAddress("Poland", "Warsaw", "30-330 Warsaw");
@@ -40,6 +45,7 @@ public class PersonResource {
         personBuilder.addRoles(
                 RoleResource.getJAVADeveloper(),
                 RoleResource.getWorkerRole());
+        personBuilder.setSalary(new Salary(EmploymentContractType.REGULAR_EMPLOYMENT, 7001));
         return personBuilder.getBuildResult();
     }
 
@@ -135,5 +141,22 @@ public class PersonResource {
         return personBuilder.getBuildResult();
     }
 
+
+    public static Set<Person> getAllPersonsFromResources() {
+        Set<Person> personSet = new HashSet<>();
+        personSet.add(PersonResource.getDatabaseDeveloperAdrianCiecholewski());
+        personSet.add(PersonResource.getDatabaseDeveloperAdrianKrawiec());
+        personSet.add(PersonResource.getDatabaseDeveloperLukaszDebinski());
+        personSet.add(PersonResource.getJavaDeveloperAdamWojcik());
+        personSet.add(PersonResource.getJavaDeveloperKamilMilosz());
+        personSet.add(PersonResource.getJavaDeveloperPiotrNawalka());
+        personSet.add(PersonResource.getJavaDeveloperWojciechSeliga());
+        personSet.add(PersonResource.getManagerJanKowalski());
+        personSet.add(PersonResource.getUXDesignerMonikaStokrotka());
+        personSet.add(PersonResource.getWebDeveloperDominikNocon());
+        personSet.add(PersonResource.getWebDeveloperMateuszStepala());
+        personSet.add(PersonResource.getWebDeveloperPrzemekRoman());
+        return personSet;
+    }
 
 }

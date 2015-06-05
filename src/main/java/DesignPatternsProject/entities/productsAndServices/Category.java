@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by lucjan on 10.03.15.
@@ -16,7 +18,7 @@ public class Category {
 //    @Id @GeneratedValue
     private Long category_id;
     private String name;
-    private List<BaseProduct> products = new ArrayList<>();
+    private Set<BaseProduct> products = new HashSet<>();
 
 
     public Category() {
@@ -26,7 +28,7 @@ public class Category {
         this.name = name;
     }
 
-    public Category(String name, List<BaseProduct> products) {
+    public Category(String name, Set<BaseProduct> products) {
         this.name = name;
         this.products = products;
     }
@@ -57,11 +59,11 @@ public class Category {
         this.name = name;
     }
 
-    public List<BaseProduct> getProducts() {
+    public Set<BaseProduct> getProducts() {
         return products;
     }
 
-    public void setProducts(List<BaseProduct> products) {
+    public void setProducts(Set<BaseProduct> products) {
         this.products = products;
     }
 }
