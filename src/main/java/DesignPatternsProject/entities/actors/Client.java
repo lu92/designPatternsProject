@@ -13,4 +13,8 @@ public class Client extends Person {
 
     public Client(String username, String password, String email) {
     }
+
+    public Client() {
+
+    }
 }

@@ -19,7 +19,8 @@ public abstract class Venue {   // miejsce spotkan
     private String name;
     private double rate;
 
-    @OneToOne(mappedBy = "venue", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Transient
+//    @OneToOne(mappedBy = "venue", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Mark> marks = new ArrayList<>();
 
 

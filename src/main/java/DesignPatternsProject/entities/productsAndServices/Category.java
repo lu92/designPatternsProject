@@ -10,10 +10,10 @@ import java.util.List;
  * Created by lucjan on 10.03.15.
  */
 
-@Entity
+//@Entity
 public class Category {
 
-    @Id @GeneratedValue
+//    @Id @GeneratedValue
     private Long category_id;
     private String name;
     private List<BaseProduct> products = new ArrayList<>();

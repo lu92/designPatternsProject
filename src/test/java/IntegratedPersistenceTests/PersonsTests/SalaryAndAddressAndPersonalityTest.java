@@ -1,6 +1,7 @@
 package IntegratedPersistenceTests.PersonsTests;
 
 import DesignPatternsProject.entities.personalData.Address;
+import DesignPatternsProject.entities.personalData.EmploymentContractType;
 import DesignPatternsProject.entities.personalData.Personality;
 import DesignPatternsProject.entities.personalData.Salary;
 import DesignPatternsProject.repositories.AddressRepository;
@@ -12,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringApplicationConfiguration(classes = DesignPatternsProject.DesignPatternsProjectApplication.class)
 @WebAppConfiguration
 @Transactional  //  IMPORTANT
+@TransactionConfiguration(defaultRollback = true)
 public class SalaryAndAddressAndPersonalityTest {
 
     @Autowired
@@ -36,9 +39,9 @@ public class SalaryAndAddressAndPersonalityTest {
     @Test
     public void SalaryTest() {
         Assert.assertNotNull(salaryRepository);
-        salaryRepository.save(new Salary(Salary.EmploymentContractType.REGULAR_EMPLOYMENT, 3000, 5000, 1000));
+        salaryRepository.save(new Salary(EmploymentContractType.REGULAR_EMPLOYMENT, 3000, 5000, 1000));
         Assert.assertEquals(1, salaryRepository.count());
-        Assert.assertSame(Salary.EmploymentContractType.REGULAR_EMPLOYMENT, salaryRepository.findOne(1L).getType());
+        Assert.assertSame(EmploymentContractType.REGULAR_EMPLOYMENT, salaryRepository.findOne(1L).getType());
 
     }
 

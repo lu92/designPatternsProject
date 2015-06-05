@@ -49,12 +49,12 @@ public class KindOfPersonsTest {
         Role scientist = new Role("scientist");
         scientist.addPrivileges("calculating", "teaching", "learning");
 
-        manager.setRole(scientist);
+        manager.addRoles(scientist);
 
         managerRepository.save(manager);
         Assert.assertEquals(new Personality("Harry", "Osborn", "12/04/1990", "123456789"), managerRepository.findOne(1L).getPersonality());
         Assert.assertEquals(1, managerRepository.count());
-        Assert.assertEquals(3, managerRepository.findOne(1L).getRole().getPrivileges().size());
+        Assert.assertEquals(3, managerRepository.findOne(1L).getRoles().size());
         System.out.println(managerRepository.findOne(1L));
     }
 

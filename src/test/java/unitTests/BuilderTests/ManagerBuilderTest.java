@@ -2,6 +2,7 @@ package unitTests.BuilderTests;
 
 import DesignPatternsProject.builders.ManagerBuilder;
 import DesignPatternsProject.entities.actors.Manager;
+import DesignPatternsProject.entities.personalData.EmploymentContractType;
 import DesignPatternsProject.entities.personalData.Salary;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,11 +19,11 @@ public class ManagerBuilderTest {
     @Test
     public void SalaryTest() {
         ManagerBuilder managerBuilder = new ManagerBuilder(username, password, email);
-        managerBuilder.setSalary(new Salary(Salary.EmploymentContractType.REGULAR_EMPLOYMENT, 3000, 5000, 1000));
+        managerBuilder.setSalary(new Salary(EmploymentContractType.REGULAR_EMPLOYMENT, 3000, 5000, 1000));
         Manager manager = (Manager) managerBuilder.getBuildResult();
         Assert.assertEquals(3000, manager.getSalary().getNetto(), 0.01);
         Assert.assertEquals(5000, manager.getSalary().getBrutto(), 0.01);
         Assert.assertEquals(1000, manager.getSalary().getInsurancePrice(), 0.01);
-        Assert.assertEquals(Salary.EmploymentContractType.REGULAR_EMPLOYMENT, manager.getSalary().getType());
+        Assert.assertEquals(EmploymentContractType.REGULAR_EMPLOYMENT, manager.getSalary().getType());
     }
 }

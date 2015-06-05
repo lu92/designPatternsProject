@@ -12,42 +12,38 @@ public abstract class BaseProduct {
     @Id @GeneratedValue
     private Long id;
     private String name;
-    private int tax;        // podatek
-    private double duty;    //  clo
+//    private int taxPercent;        // podatek // do usuniecia
+//    private double duty;    //  clo // do usuniecia
     private double netto;
-    private double brutto;
+    private double brutto;      // to trzeba policzyc ze wzgledu na opodatkowanie
 
 
-    private Category category;
+    @Transient
+    private Category category;  // zeby policzyc podatek ze wzgledu na podatek
 
     public BaseProduct() {
     }
 
-    public BaseProduct(String name) {
+    public BaseProduct(String name, double netto) {
         this.name = name;
-    }
-
-    public BaseProduct(double netto, double brutto, String name) {
-        this(name);
         this.netto = netto;
-        this.brutto = brutto;
-    }
-    public BaseProduct(String name, double duty, int tax, double netto, double brutto) {
-        this(netto, brutto, name);
-        this.duty = duty;
-        this.tax = tax;
     }
 
-
-    public BaseProduct(String name, Category category, int tax, double duty, double netto, double brutto) {
-        this(name, duty, tax, netto, brutto);
+    public BaseProduct(String name, double netto, Category category) {
+        this(name, netto);
         this.category = category;
     }
 
-    public BaseProduct(Long id, String name, Category category, int tax, double duty, double netto, double brutto) {
-        this(name, category, tax, duty, netto, brutto);
+    public BaseProduct(Long id, String name, double netto) {
+        this(name, netto);
         this.id = id;
     }
+
+    public BaseProduct(Long id, String name, double netto, Category category) {
+        this(id, name, netto);
+        this.category = category;
+    }
+
 
     public Long getId() {
         return id;
@@ -61,40 +57,12 @@ public abstract class BaseProduct {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Category getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public int getTax() {
-        return tax;
-    }
-
-    public void setTax(int tax) {
-        this.tax = tax;
-    }
-
-    public double getDuty() {
-        return duty;
-    }
-
-    public void setDuty(double duty) {
-        this.duty = duty;
-    }
-
     public double getNetto() {
         return netto;
-    }
-
-    public void setNetto(double netto) {
-        this.netto = netto;
     }
 
     public double getBrutto() {
@@ -105,16 +73,15 @@ public abstract class BaseProduct {
         this.brutto = brutto;
     }
 
+
     @Override
     public String toString() {
         return "BaseProduct{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", category=" + category +
-                ", tax=" + tax +
-                ", duty=" + duty +
                 ", netto=" + netto +
                 ", brutto=" + brutto +
+                ", category=" + category +
                 '}';
     }
 }

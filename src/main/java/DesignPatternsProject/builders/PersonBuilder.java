@@ -4,6 +4,7 @@ import DesignPatternsProject.entities.actors.*;
 import DesignPatternsProject.entities.personalData.Address;
 import DesignPatternsProject.entities.personalData.Personality;
 import DesignPatternsProject.entities.personalData.Role;
+import DesignPatternsProject.entities.personalData.Salary;
 
 import java.util.Date;
 
@@ -30,7 +31,7 @@ public class PersonBuilder implements AbstractPersonBuilder{
 
         preparePersonFromClassType(username, password, email, clazz);
         setPersonality(personality);
-        setRole(role);
+        addRole(role);
         setAddress(address);
     }
 
@@ -41,7 +42,7 @@ public class PersonBuilder implements AbstractPersonBuilder{
 
         preparePersonFromStringType(username, password, email, type);
         setPersonality(personality);
-        setRole(role);
+        addRole(role);
         setAddress(address);
     }
 
@@ -108,8 +109,14 @@ public class PersonBuilder implements AbstractPersonBuilder{
     }
 
     @Override
-    public void setRole(Role role) {
-        person.setRole(role);
+    public void addRole(Role role) {
+        person.addRoles(role);
+    }
+
+    @Override
+    public void addRoles(Role... roles) {
+        for (Role role : roles)
+            person.getRoles().add(role);
     }
 
     @Override
@@ -120,6 +127,11 @@ public class PersonBuilder implements AbstractPersonBuilder{
     @Override
     public void setAddress(Address address) {
         person.setAddress(address);
+    }
+
+    @Override
+    public void setSalary(Salary salary) {
+        person.setSalary(salary);
     }
 
     @Override

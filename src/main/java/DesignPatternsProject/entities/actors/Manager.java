@@ -13,6 +13,10 @@ public class Manager extends Person {
     @Transient
     Salary salary;
 
+
+    public Manager() {
+    }
+
     public Manager(String username, String password, String email) {
         super(username, password, email);
     }

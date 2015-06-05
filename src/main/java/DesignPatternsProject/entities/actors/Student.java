@@ -11,4 +11,8 @@ public class Student extends Person {
     public Student(String username, String password, String email) {
         super(username, password, email);
     }
+
+    public Student() {
+
+    }
 }

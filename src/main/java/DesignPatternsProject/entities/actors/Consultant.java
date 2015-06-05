@@ -11,4 +11,8 @@ public class Consultant extends Person{
     public Consultant(String username, String password, String email) {
         super(username, password, email);
     }
+
+    public Consultant() {
+
+    }
 }

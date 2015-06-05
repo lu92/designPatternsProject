@@ -27,6 +27,8 @@ public class Personality {
     @PrimaryKeyJoinColumn
     private Person person;
 
+    public Personality() {
+    }
 
     public Personality(String name, String lastname, Date birth, String telephoneNumber) {
         this.name = name;

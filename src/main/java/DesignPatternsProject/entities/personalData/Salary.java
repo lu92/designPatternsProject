@@ -19,17 +19,22 @@ public class Salary {
     private double brutto;
     private double insurancePrice;  // cena ubezpieczenia
 
-    public enum EmploymentContractType {
-        REGULAR_EMPLOYMENT,             //   umowa o prace
-        FIXED_TERM_EMPLOYMENT           //  umowa zlecenie
-    }
-
     public Salary() {
     }
 
     public Salary(EmploymentContractType type, double brutto) {
         this.type = type;
         this.brutto = brutto;
+        if (type == EmploymentContractType.REGULAR_EMPLOYMENT) {
+            this.insurancePrice = 30 * brutto / 100;
+            this.netto = brutto - insurancePrice;
+        }
+
+        if (type == EmploymentContractType.FIXED_TERM_EMPLOYMENT) {
+            this.insurancePrice = 10 * brutto / 100;
+            this.netto = brutto - insurancePrice;
+        }
+
     }
 
     //      Constructors only for tests

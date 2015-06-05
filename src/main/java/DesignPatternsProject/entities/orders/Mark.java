@@ -1,6 +1,5 @@
 package DesignPatternsProject.entities.orders;
 
-import DesignPatternsProject.entities.places.Restaurant;
 import DesignPatternsProject.entities.places.Venue;
 
 import javax.persistence.*;

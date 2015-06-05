@@ -94,12 +94,12 @@ public class PersonBuilderTest {
         AbstractPersonBuilder builder = new PersonBuilder(username, password, email, Student.class);
         builder.setPersonality(personality);
         builder.setAddress(address);
-        builder.setRole(role);
+        builder.addRole(role);
         Student student = (Student) builder.getBuildResult();
         Assert.assertNotNull(student);
         Assert.assertSame(personality, student.getPersonality());
         Assert.assertSame(address, student.getAddress());
-        Assert.assertSame(role, student.getRole());
+        Assert.assertTrue(student.getRoles().contains(role));
     }
 
     @Test(expected = IllegalArgumentException.class)

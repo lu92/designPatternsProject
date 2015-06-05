@@ -47,8 +47,9 @@ public class Role {
 
     //              METHODS
 
-    public void addPrivilege(Privilege privilege) {
-        privileges.add(privilege);
+    public void addPrivileges(Privilege ... newPrivileges) {
+        for (Privilege privilege : newPrivileges)
+            privileges.add(privilege);
     }
 
     public void addPrivileges(String ... args) {

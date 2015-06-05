@@ -3,9 +3,12 @@ package DesignPatternsProject.entities.actors;
 import DesignPatternsProject.entities.personalData.Address;
 import DesignPatternsProject.entities.personalData.Personality;
 import DesignPatternsProject.entities.personalData.Role;
+import DesignPatternsProject.entities.personalData.Salary;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by lucjan on 10.03.15.
@@ -26,8 +29,11 @@ public abstract class Person {
     @OneToOne(mappedBy = "person", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Address address;
 
-    @OneToOne(mappedBy = "person", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Role role;
+//    @OneToOne(mappedBy = "person", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Role> roles = new HashSet<>();
+
+
+    private Salary salary;
 
     public Person() {
     }
@@ -39,23 +45,27 @@ public abstract class Person {
         this.email = email;
     }
 
-    public Person(String username, String password, String email, Personality personality, Address address, Role role) {
+    public Person(String username, String password, String email, Personality personality, Address address, Set<Role> role, Salary salary) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.personality = personality;
         this.address = address;
-        this.role = role;
+        this.roles = role;
+        this.salary = salary;
     }
 
-    public Person(Long person_id, String username, String password, String email, Personality personality, Address address, Role role) {
-        this(username, password, email, personality, address, role);
+    public Person(Long person_id, String username, String password, String email, Personality personality, Address address, Set<Role> role, Salary salary) {
+        this(username, password, email, personality, address, role, salary);
         this.person_id = person_id;
     }
 
-    public enum PersonType {
-        CLIENT, CONSULTANT, MANAGER, STUDENT, WORKER;
+    public void addRoles(Role ... roles) {
+        for (Role role : roles) {
+            getRoles().add(role);
+        }
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -66,7 +76,7 @@ public abstract class Person {
 
         if (!email.equals(person.email)) return false;
         if (!personality.equals(person.personality)) return false;
-        if (!role.equals(person.role)) return false;
+        if (!roles.equals(person.roles)) return false;
         if (!username.equals(person.username)) return false;
 
         return true;
@@ -77,7 +87,7 @@ public abstract class Person {
         int result = username.hashCode();
         result = 31 * result + email.hashCode();
         result = 31 * result + personality.hashCode();
-        result = 31 * result + role.hashCode();
+        result = 31 * result + roles.hashCode();
         return result;
     }
 
@@ -129,12 +139,20 @@ public abstract class Person {
         this.address = address;
     }
 
-    public Role getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Salary getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Salary salary) {
+        this.salary = salary;
     }
 
     @Override
@@ -146,7 +164,7 @@ public abstract class Person {
                 ", email='" + email + '\'' +
                 ", personality=" + personality +
                 ", address=" + address +
-                ", role=" + role +
+                ", roles=" + roles +
                 '}';
     }
 }
